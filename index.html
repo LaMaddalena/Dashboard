@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Personal dashboard with links, weather, calendar, RSS feeds, and stock tickers">
+    <link rel="manifest" href="data:application/json,{%22name%22:%22Personal%20Dashboard%22,%22short_name%22:%22Dashboard%22,%22start_url%22:%22./%22,%22display%22:%22standalone%22,%22theme_color%22:%22%23212833%22}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">Personal Dashboard</h1>
+            <div class="header__controls">
+                <button class="btn btn--outline theme-toggle" aria-label="Toggle theme">
+                    <span class="theme-toggle__icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Frequent Links Section -->
+            <section class="section">
+                <h2 class="section__title">Quick Links</h2>
+                <div class="links-grid" id="linksGrid">
+                    <!-- Dynamic content -->
+                </div>
+            </section>
+
+            <!-- Weather and Calendar Row -->
+            <div class="info-row">
+                <!-- Weather Section -->
+                <section class="section weather-section">
+                    <h2 class="section__title">Weather</h2>
+                    <div class="card weather-card" id="weatherCard">
+                        <div class="loading-skeleton weather-skeleton" id="weatherSkeleton">
+                            <div class="skeleton-line skeleton-line--lg"></div>
+                            <div class="skeleton-line skeleton-line--md"></div>
+                            <div class="skeleton-line skeleton-line--sm"></div>
+                        </div>
+                        <div class="weather-content" id="weatherContent" style="display: none;">
+                            <!-- Dynamic weather content -->
+                        </div>
+                        <div class="error-state" id="weatherError" style="display: none;">
+                            <p>Unable to load weather data</p>
+                            <button class="btn btn--sm btn--outline" onclick="loadWeather()">Retry</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Calendar Section -->
+                <section class="section calendar-section">
+                    <h2 class="section__title">Upcoming Events</h2>
+                    <div class="card calendar-card" id="calendarCard">
+                        <div class="loading-skeleton calendar-skeleton" id="calendarSkeleton">
+                            <div class="skeleton-line skeleton-line--md"></div>
+                            <div class="skeleton-line skeleton-line--sm"></div>
+                            <div class="skeleton-line skeleton-line--md"></div>
+                            <div class="skeleton-line skeleton-line--sm"></div>
+                        </div>
+                        <div class="calendar-content" id="calendarContent" style="display: none;">
+                            <!-- Dynamic calendar content -->
+                        </div>
+                        <div class="calendar-setup" id="calendarSetup">
+                            <p class="setup-message">Calendar not configured</p>
+                            <small>Edit the calendar config in app.js to connect your calendar</small>
+                        </div>
+                        <div class="error-state" id="calendarError" style="display: none;">
+                            <p>Unable to load calendar events</p>
+                            <button class="btn btn--sm btn--outline" onclick="loadCalendar()">Retry</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- RSS and Tickers Row -->
+            <div class="content-row">
+                <!-- RSS Section -->
+                <section class="section rss-section">
+                    <h2 class="section__title">Latest Headlines</h2>
+                    <div class="card rss-card" id="rssCard">
+                        <div class="loading-skeleton rss-skeleton" id="rssSkeleton">
+                            <div class="skeleton-line skeleton-line--lg"></div>
+                            <div class="skeleton-line skeleton-line--md"></div>
+                            <div class="skeleton-line skeleton-line--lg"></div>
+                            <div class="skeleton-line skeleton-line--sm"></div>
+                        </div>
+                        <div class="rss-content" id="rssContent" style="display: none;">
+                            <!-- Dynamic RSS content -->
+                        </div>
+                        <div class="error-state" id="rssError" style="display: none;">
+                            <p>Unable to load RSS feeds</p>
+                            <button class="btn btn--sm btn--outline" onclick="loadRSSFeeds()">Retry</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tickers Section -->
+                <section class="section tickers-section">
+                    <h2 class="section__title">Market Tickers</h2>
+                    <div class="card tickers-card" id="tickersCard">
+                        <div class="loading-skeleton tickers-skeleton" id="tickersSkeleton">
+                            <div class="skeleton-line skeleton-line--md"></div>
+                            <div class="skeleton-line skeleton-line--sm"></div>
+                        </div>
+                        <div class="tickers-content" id="tickersContent" style="display: none;">
+                            <!-- Dynamic tickers content -->
+                        </div>
+                        <div class="error-state" id="tickersError" style="display: none;">
+                            <p>Unable to load market data</p>
+                            <button class="btn btn--sm btn--outline" onclick="loadTickers()">Retry</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">Last updated: <span id="lastUpdated">Never</span></p>
+            <div class="footer__status">
+                <span class="status-indicator" id="networkStatus">🟢</span>
+                <span class="status-text">Online</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
